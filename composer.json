@@ -1,5 +1,18 @@
 {
+	"name": "m4rw3r/auto-curry",
+	"description": "Provides automatic currying of functions and methods.",
+	"keywords": ["functional", "currying"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Martin Wernstål",
+			"email": "m4rw3r@gmail.com"
+		}
+	],
 	"autoload": {
 		"files": ["src/autoCurry.php"]
+	},
+	"extra": {
+		"branch-alias": { "dev-master": "1.0-dev" }
 	}
 }
