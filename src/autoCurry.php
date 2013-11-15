@@ -11,7 +11,7 @@ function autoCurry(callable $callable, $num_params = false)
 		$num_params = callableReflection($callable)->getNumberOfParameters();
 	}
 
-	$params = array();
+	$params = [];
 
 	$curry = function() use($callable, $num_params, &$curry, &$params) {
 		$params = array_merge($params, func_get_args());

@@ -8,7 +8,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 {
 	public static function staticFunctionForCurry($a, $b, $c)
 	{
-		return array($a, $b, $c);
+		return [$a, $b, $c];
 	}
 
 	/**
@@ -42,12 +42,12 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy1 = new stdClass();
 		$dummy2 = new stdClass();
 
-		$f = autoCurry(function($a, $b) { return array($a, $b); });
+		$f = autoCurry(function($a, $b) { return [$a, $b]; });
 
 		$f2 = $f($dummy1);
 
 		$this->assertTrue(is_callable($f2));
-		$this->assertSame($f2($dummy2), array($dummy1, $dummy2));
+		$this->assertSame($f2($dummy2), [$dummy1, $dummy2]);
 	}
 
 	public function testThreeParameters()
@@ -56,7 +56,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy2 = new stdClass();
 		$dummy3 = new stdClass();
 
-		$f = autoCurry(function($a, $b, $c) { return array($a, $b, $c); });
+		$f = autoCurry(function($a, $b, $c) { return [$a, $b, $c]; });
 
 		$f2 = $f($dummy1);
 
@@ -65,7 +65,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$f3 = $f($dummy2);
 
 		$this->assertTrue(is_callable($f3));
-		$this->assertSame($f3($dummy3), array($dummy1, $dummy2, $dummy3));
+		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
 	}
 
 	public function testStaticFunction1()
@@ -83,7 +83,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$f3 = $f($dummy2);
 
 		$this->assertTrue(is_callable($f3));
-		$this->assertSame($f3($dummy3), array($dummy1, $dummy2, $dummy3));
+		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
 	}
 
 	public function testStaticFunction2()
@@ -92,7 +92,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy2 = new stdClass();
 		$dummy3 = new stdClass();
 
-		$f = autoCurry(array('m4rw3r\AutoCurryTest', 'staticFunctionForCurry'));
+		$f = autoCurry(['m4rw3r\AutoCurryTest', 'staticFunctionForCurry']);
 
 		$f2 = $f($dummy1);
 
@@ -101,6 +101,6 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$f3 = $f($dummy2);
 
 		$this->assertTrue(is_callable($f3));
-		$this->assertSame($f3($dummy3), array($dummy1, $dummy2, $dummy3));
+		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
 	}
 }
