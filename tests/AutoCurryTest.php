@@ -123,6 +123,36 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame($f2($dummy5), [$dummy1, $dummy2, $dummy3, $dummy4, $dummy5]);
 	}
 
+	public function testSpecifyNumParams1()
+	{
+		$dummy1 = new stdClass();
+		$dummy2 = new stdClass();
+
+		$f = autoCurry(function($a, $b, $c = 'foobar') { return [$a, $b, $c]; }, 2);
+
+		$this->assertTrue(is_callable($f));
+
+		$f2 = $f($dummy1);
+
+		$this->assertTrue(is_callable($f2));
+		$this->assertSame($f2($dummy2), [$dummy1, $dummy2, 'foobar']);
+	}
+
+	public function testSpecifyNumParams2()
+	{
+		$dummy1 = new stdClass();
+		$dummy2 = new stdClass();
+
+		$f = autoCurry(function($a) { return func_get_args(); }, 2);
+
+		$this->assertTrue(is_callable($f));
+
+		$f2 = $f($dummy1);
+
+		$this->assertTrue(is_callable($f2));
+		$this->assertSame($f2($dummy2), [$dummy1, $dummy2]);
+	}
+
 	public function testStaticFunction1()
 	{
 		$dummy1 = new stdClass();
