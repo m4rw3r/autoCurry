@@ -68,7 +68,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_callable($f2));
 		
-		$f3 = $f($dummy2);
+		$f3 = $f2($dummy2);
 
 		$this->assertTrue(is_callable($f3));
 		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
@@ -117,10 +117,10 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_callable($f2));
 
-		$f3 = $f($dummy3, $dummy4);
+		$f3 = $f2($dummy3, $dummy4);
 
 		$this->assertTrue(is_callable($f3));
-		$this->assertSame($f2($dummy5), [$dummy1, $dummy2, $dummy3, $dummy4, $dummy5]);
+		$this->assertSame($f3($dummy5), [$dummy1, $dummy2, $dummy3, $dummy4, $dummy5]);
 	}
 
 	public function testSpecifyNumParams1()
@@ -195,7 +195,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy3 = new stdClass();
 		$dummy4 = new stdClass();
 
-		$f = autoCurry(function($a) { return $a; });
+		$f = autoCurry(function($a, $b) { return [$a, $b]; });
 
 		$this->assertTrue(is_callable($f));
 
@@ -227,7 +227,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_callable($f2));
 		
-		$f3 = $f($dummy2);
+		$f3 = $f2($dummy2);
 
 		$this->assertTrue(is_callable($f3));
 		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
@@ -247,7 +247,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue(is_callable($f2));
 		
-		$f3 = $f($dummy2);
+		$f3 = $f2($dummy2);
 
 		$this->assertTrue(is_callable($f3));
 		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
