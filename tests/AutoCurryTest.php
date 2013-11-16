@@ -25,6 +25,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$f = autoCurry(function() use($dummy) { return $dummy; });
 
+		$this->assertTrue(is_callable($f));
 		$this->assertSame($f(), $dummy);
 	}
 
@@ -34,6 +35,7 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$f = autoCurry(function($a) { return $a; });
 
+		$this->assertTrue(is_callable($f));
 		$this->assertSame($f($dummy), $dummy);
 	}
 
@@ -43,6 +45,8 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy2 = new stdClass();
 
 		$f = autoCurry(function($a, $b) { return [$a, $b]; });
+
+		$this->assertTrue(is_callable($f));
 
 		$f2 = $f($dummy1);
 
@@ -57,6 +61,8 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy3 = new stdClass();
 
 		$f = autoCurry(function($a, $b, $c) { return [$a, $b, $c]; });
+
+		$this->assertTrue(is_callable($f));
 
 		$f2 = $f($dummy1);
 
@@ -76,6 +82,8 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 
 		$f = autoCurry('m4rw3r\AutoCurryTest::staticFunctionForCurry');
 
+		$this->assertTrue(is_callable($f));
+
 		$f2 = $f($dummy1);
 
 		$this->assertTrue(is_callable($f2));
@@ -93,6 +101,8 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$dummy3 = new stdClass();
 
 		$f = autoCurry(['m4rw3r\AutoCurryTest', 'staticFunctionForCurry']);
+
+		$this->assertTrue(is_callable($f));
 
 		$f2 = $f($dummy1);
 
