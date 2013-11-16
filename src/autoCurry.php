@@ -34,6 +34,9 @@ function callableReflection(callable $callable)
 	elseif(is_string($callable) && strpos($callable, ':') !== false) {
 		return new ReflectionMethod($callable);
 	}
+	elseif(is_object($callable)) {
+		return new ReflectionMethod($callable, '__invoke');
+	}
 	else {
 		return new ReflectionFunction($callable);
 	}
