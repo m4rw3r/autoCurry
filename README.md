@@ -10,6 +10,8 @@ Note that the function not only works on other functions, it also works on
 objects implementing ``__invoke()``, closures, static methods and standard
 object methods.
 
+To see how autoCurry can help you write very terse code, watch this video:
+[Hey underscore, you're doing it wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
 
 Usage
 -----
