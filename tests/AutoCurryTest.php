@@ -162,4 +162,44 @@ class AutoCurryTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue(is_callable($f3));
 		$this->assertSame($f3($dummy3), [$dummy1, $dummy2, $dummy3]);
 	}
+
+	public function testInvokeObject()
+	{
+		$dummy1 = new stdClass();
+		$dummy2 = new stdClass();
+		$dummy3 = new stdClass();
+
+		/* Have to use a real class here, as PHPUnit's getMock()
+		 * creates an __invoke() method without any parameters.
+		 */
+		$o = new InvokeAbleObject1(function($params) use($dummy1, $dummy2, $dummy3) {
+			$this->assertSame($params, [$dummy1, $dummy2]);
+
+			return $dummy3;
+		});
+
+		$f = autoCurry($o);
+
+		$this->assertTrue(is_callable($f));
+
+		$f2 = $f($dummy1);
+
+		$this->assertTrue(is_callable($f2));
+		$this->assertSame($f2($dummy2), $dummy3);
+	}
+}
+
+class InvokeAbleObject1
+{
+	public function __construct(callable $func)
+	{
+		$this->func = $func;
+	}
+
+	public function __invoke($a, $b)
+	{
+		$f = $this->func;
+
+		return $f(func_get_args());
+	}
 }
