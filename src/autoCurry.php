@@ -11,19 +11,20 @@ function autoCurry(callable $callable, $num_params = false)
 		$num_params = callableReflection($callable)->getNumberOfParameters();
 	}
 
-	$params = [];
+	return curryStep($callable, $num_params, []);
+}
 
-	$curry = function() use($callable, $num_params, &$curry, &$params) {
-		$params = array_merge($params, func_get_args());
+function curryStep($callable, $num_params, array $params)
+{
+	return function() use($callable, $num_params, $params) {
+		$p = array_merge($params, func_get_args());
 
-		if(count($params) >= $num_params) {
-			return call_user_func_array($callable, $params);
+		if(count($p) >= $num_params) {
+			return call_user_func_array($callable, $p);
 		}
 
-		return $curry;
+		return curryStep($callable, $num_params, $p);
 	};
-
-	return $curry;
 }
 
 function callableReflection(callable $callable)
