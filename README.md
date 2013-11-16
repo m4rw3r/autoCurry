@@ -37,7 +37,7 @@ Prototype
 ---------
 
 ```php
-m4rw3r\autoCurry(callable [, num_params = false])
+callable m4rw3r\autoCurry(callable [, num_params = false])
 ```
 
 * ``callable``: The function/closure/method/object to curry
@@ -46,5 +46,5 @@ m4rw3r\autoCurry(callable [, num_params = false])
   parameters is being curryed.
 
 ``autoCurry()`` will automatically determine the number of parameters if
-``num_params`` is ``false``, through the use of ``ReflectionMethod and
+``num_params`` is ``false``, through the use of ``ReflectionMethod`` and
 ``ReflectionFunction``.
