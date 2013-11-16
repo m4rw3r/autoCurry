@@ -30,7 +30,7 @@ $concat = m4rw3r\autoCurry(function($a, $b) {
 $namePrefix = $concat('Test');
 
 $names = array_map($namePrefix, ['Foo', 'Bar']);
-/* array(2) { [0] => string(7) "TestFoo" [1] => string(7) "TestFoo" } */
+/* array(2) { [0] => string(7) "TestFoo" [1] => string(7) "TestBar" } */
 ```
 
 Prototype
