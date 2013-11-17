@@ -5,17 +5,12 @@ namespace m4rw3r;
 use ReflectionMethod;
 use ReflectionFunction;
 
-function autoCurry(callable $callable, $num_params = false)
+function autoCurry(callable $callable, $num_params = false, array $params = array())
 {
 	if($num_params === false) {
 		$num_params = callableReflection($callable)->getNumberOfParameters();
 	}
 
-	return curryStep($callable, $num_params, []);
-}
-
-function curryStep($callable, $num_params, array $params)
-{
 	return function() use($callable, $num_params, $params) {
 		$p = array_merge($params, func_get_args());
 
@@ -23,7 +18,7 @@ function curryStep($callable, $num_params, array $params)
 			return call_user_func_array($callable, $p);
 		}
 
-		return curryStep($callable, $num_params, $p);
+		return autoCurry($callable, $num_params, $p);
 	};
 }
 
