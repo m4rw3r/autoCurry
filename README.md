@@ -1,6 +1,8 @@
 autoCurry
 =========
 
+[![Build Status](https://travis-ci.org/m4rw3r/autoCurry.png)](https://travis-ci.org/m4rw3r/autoCurry)
+
 Enables automatic currying of functions. Every call to an ``autoCurry``ed function
 will return a new function accepting the remaining function parameters until all
 parameters have been gathered whereupon the wrapped function will be executed
@@ -10,7 +12,7 @@ Note that the function not only works on other functions, it also works on
 objects implementing ``__invoke()``, closures, static methods and standard
 object methods.
 
-To see how autoCurry can help you write very terse code, watch this video:
+To see how ``autoCurry`` can help you write very terse code, watch this video:
 [Hey underscore, you're doing it wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
 
 Usage
